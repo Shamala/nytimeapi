@@ -1,6 +1,5 @@
 import "./App.css";
 import { useState } from "react";
-import { useEffect } from "react";
 import Search from "./Search/Search.jsx";
 import Articles from "./Articles/Articles.jsx";
 import ArticleContent from "./ArticleContent/ArticleContent";
@@ -10,13 +9,13 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [articleDetail, setShowArticleDetail] = useState(undefined);
-
+  const apiKey = import.meta.env.VITE_APP_API_KEY;
   const searchArticle = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setShowArticleDetail(false);
     const articleSearchAPIResponse = await fetch(
-      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=${process.env.REACT_APP_API_KEY}`
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=${apiKey}`
     );
 
     const articleSearchResults = await articleSearchAPIResponse.json();
